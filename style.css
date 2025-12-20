@@ -1,0 +1,247 @@
+/* Esasy sazlamalar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.containe {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    
+    
+}
+
+/* Header stili */
+.navbar {
+    background-color: #FFFFFF;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Ýeňil kölege */
+    border-radius: 0 0 14px 14px;
+
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    
+}
+
+.logo a {
+    font-size: 24px;
+    font-weight: bold;
+    background: transparent;
+    color: #373636;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+/* Burger Menu düwmesi */
+.burger-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 100%;
+    height: 45px;
+    width: 45px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.burger-menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+/* Açylýan menýu stili */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 71px; /* Header-iň tam aşagyndan başlar */
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    overflow: hidden;
+    max-height: 0; /* Başda ýapyk durar */
+    transition: max-height 0.4s ease-in-out;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+}
+
+.nav-links.active {
+    max-height: 300px; /* Menýu açylanda beýikligi */
+}
+
+.nav-links ul {
+    list-style: none;
+    padding: 20px 0;
+    text-align: center;
+    width: 95%;
+}
+
+.nav-links ul li {
+    padding: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 95%;
+    margin: 6px;
+}
+
+.nav-links ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.nav-links ul li a:hover {
+    color: #007bff;
+    transform: 5s;
+}
+
+.scrollmenu {
+    display: flex;
+    flex-direction: row;
+    margin-top: 80px;
+    background: #FFFFFF;
+    width: 100%;
+    height: 200px;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 20px auto;
+    align-items: center;
+    flex: fixed;
+}
+.scrollmenu .card {
+    display: flex;
+    flex-direction: column;
+    flex: fixed;
+    background: transparent;
+    background-color: blur(100%);
+    flex: 0 0 250px;
+    height: 180px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-left: 10px;
+}
+.card img {
+    height: 130px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/*.scroll-container {
+  display: flex; /* Elementleri bir hatara düzýär *
+  overflow-x: auto; / Gapdallygyna süýşmäge rugsat berýär *
+  gap: 15px; /Bildirişleriň arasyny açýar /
+  padding: 20px;
+  scroll-snap-type: x mandatory; /Süýşürilende her kartda saklanmagy üçin (2025-de moda) /
+  webkit-overflow-scrolling: touch; / Telefonda ýumşak süýşmegi üçin 
+}
+
+/* Scroll (süýşürgiç) syzygy görünmez ýaly etmek üçin (islege görä) 
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  flex: 0 0 250px; /* Bu örän möhüm! Kartyň gysylmagynyň öňüni alýar we ini 250px edýär */
+/*  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+/*  scroll-snap-align: start; /* Kartyň ekranyň başynda saklanmagyny üpjün edýär *
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover; /* Suratyň görnüşini bozman ýerleşdirýär *
+}*/
+p {
+    margin: 9px;
+}
+.userinfo {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 360px;
+    height: 430px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: fixed;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: solid 0.1px;
+    margin: 7px 5px 7px 5px;
+}
+.userimg {
+    width: 45px;
+    height: 45px;
+    margin-left: 3%;
+    border-radius: 100%;
+}
+.usinname {
+    margin-left: -145px;
+}
+.headerinfo {
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 55px;
+}
+.userinfo .imginfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 330px;
+    object-fit: cover;
+    overflow: hidden;
+}
+.userinfo .footerinfo {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+    z-index: 3;
+    box-shadow: 0 6px 19px rgba(0, 0, 0, 0.08);
+}
+.usercontener {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 100%;
+}

@@ -83,6 +83,37 @@
     
     </div>
   <script src="script.js" type="text/javascript" charset="utf-8"></script>
+<script>
+  const { createClient } = supabase
+  const _supabase = createClient('https://YOUR_PROJECT_ID.supabase.co', 'YOUR_ANON_KEY')
+
+  // Maglumatlary çekmek üçin funksiýa
+  async function ulanyjylaryGetir() {
+    const { data, error } = await _supabase
+      .from('ulanyjylar') // Tablisanyň ady
+      .select('ady, e_poçtasy')         // Ady we e-poçtasyny çek
+
+    if (error) {
+      console.log('Ýalňyşlyk:', error)
+    } else {
+      console.log('Maglumatlar:', data)
+      // Maglumatlary ekrana çykarmak üçin funksiýa ýazarys
+      ekranaÇykar(data)
+    }
+  }
+
+  function ekranaÇykar(data) {
+    const list = document.getElementById('ulanyjy-sanawy')
+    list.innerHTML = '' // Sahypany täzele
+    data.forEach(item => {
+      list.innerHTML += `<li>${item.ady} - ${item.e_poçtasy}</li>`
+    })
+  }
+
+  // Sahypa açylanda işlet
+  ulanyjylaryGetir()
+</script>
+
 </body>
 
 </html>

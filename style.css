@@ -20,7 +20,7 @@
 
 /* Header stili */
 .navbar {
-    background-color: #FFFFFF;
+    background-color: #FFFFFf;
     height: 70px;
     display: flex;
     flex-direction: column;
@@ -41,6 +41,9 @@
     justify-content: space-between;
     align-items: center;
     background: transparent;
+    /*border: 2px solid rgb(255,255,255, .2);
+    backdrop-filter: blur(40px) #B6B8D7;
+    box-shadow: 0 0 10px rgba(0,0,0, .2);*/
     
 }
 
@@ -127,73 +130,72 @@
 .scrollmenu {
     display: flex;
     flex-direction: row;
-    margin-top: 80px;
-    background: #FFFFFF;
+    margin-top: 10px;
+    background: #FFFfFF;
     width: 100%;
-    height: 200px;
+    height: 330px;
     overflow-x: auto;
     gap: 10px;
     padding: 20px auto;
     align-items: center;
     flex: fixed;
 }
-.scrollmenu .card {
+ .scrollmenu .card {
     display: flex;
     flex-direction: column;
-    flex: fixed;
-    background: transparent;
-    background-color: blur(100%);
+    position: relative; /* Bu möhüm: içindäki elementleri muňa görä ýerleşdirer */
     flex: 0 0 250px;
-    height: 180px;
+    height: 300px;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    margin-left: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-left: 5px;
+    margin-right: 5px;
+    border: solid 0.2px #A6A8BC;
 }
-.card img {
-    height: 130px;
+
+.card .main-img { /* Uly surat üçin klass goşuň ýa-da kody üýtgediň */
+    height: 100%;
     width: 100%;
+    object-fit: cover;
+    position: absolute; /* Suraty arka fona ýerleşdirýär */
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.scrollmenu .card .carduserfoto {
+    position: absolute; /* Suratyň üstüne çykmagy üçin */
+    bottom: 0; /* Aşakda durmagy üçin */
+    left: 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    z-index: 2; /* Suratyň üstünde durmagyny üpjün edýär */
+    
+    /* Gowy görünmegi üçin dury fon ýa-da aýna effekti */
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(3px); 
+}
+
+.scrollmenu .card .carduserfoto img {
+    height: 40px;
+    width: 40px;
+    margin-left: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
     object-fit: cover;
 }
 
-/*.scroll-container {
-  display: flex; /* Elementleri bir hatara düzýär *
-  overflow-x: auto; / Gapdallygyna süýşmäge rugsat berýär *
-  gap: 15px; /Bildirişleriň arasyny açýar /
-  padding: 20px;
-  scroll-snap-type: x mandatory; /Süýşürilende her kartda saklanmagy üçin (2025-de moda) /
-  webkit-overflow-scrolling: touch; / Telefonda ýumşak süýşmegi üçin 
-}
-
-/* Scroll (süýşürgiç) syzygy görünmez ýaly etmek üçin (islege görä) 
-.scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-.card {
-  flex: 0 0 250px; /* Bu örän möhüm! Kartyň gysylmagynyň öňüni alýar we ini 250px edýär */
-/*  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-/*  scroll-snap-align: start; /* Kartyň ekranyň başynda saklanmagyny üpjün edýär *
-}
-
-.card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover; /* Suratyň görnüşini bozman ýerleşdirýär *
-}*/
-p {
-    margin: 9px;
-}
 .userinfo {
     background-color: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 360px;
-    height: 430px;
+    height: 480px;
     border-radius: 12px;
     overflow: hidden;
     display: fixed;
@@ -216,13 +218,14 @@ p {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 55px;
+    height: 60px;
 }
 .userinfo .imginfo {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 330px;
+    height: 100%;
+    background: cover;
     object-fit: cover;
     overflow: hidden;
 }
@@ -231,7 +234,7 @@ p {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 50px;
+    height: 60px;
     justify-content: center;
     z-index: 3;
     box-shadow: 0 6px 19px rgba(0, 0, 0, 0.08);
@@ -244,4 +247,75 @@ p {
     align-items: center;
     background-color: transparent;
     width: 100%;
+}
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #C1C2D1;
+}
+.reklama-menu .slider-contener {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    height: 250px;
+    border: solid 1px #1C1D25;
+    border-radius: 10px;
+    
+}
+.reklama-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 83px;
+    width: 100%;
+    height: 260px;
+}
+
+.slider-konteyner {
+  display: flex;
+  margin-top: 80px;
+  width: 95%;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto; /* Gorizontal süýşmek üçin */
+  scroll-snap-type: x mandatory; /* Kartlaryň ýerine "çommaly" durmagy üçin */
+  gap: 10px;
+}
+.reklama-karty {
+  flex: 0 0 100%; /* Her kart bütin ekrany tutýar */
+  scroll-snap-align: center;
+  height: 230px;
+  background: gold;
+  border-radius: 10px;
+}
+
+.users {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    width: 100%;
+    height: 110px;
+    padding: 0 0 0 30px;
+}
+
+.userb {
+    display: flex;
+    flex: 0 0 95px;
+    height: 95px;
+    width: 95px;
+    overflow: hidden;
+    border-radius: 100%;
+    margin: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: solid 0.2 px #797B91;
+}
+.userb > img {
+    width: 100%;
+    height: 100%;
 }

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="tk">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arslan Gurbanow | Fullstack Developer</title>
-  <meta name="description" content="Arslan Gurbanow - Fullstack Web & Mobile Developer. React, Next.js, Node.js, PostgreSQL, React Native, Expo. Türkmenistan">
+  <meta name="description" content="Arslan Gurbanow - Fullstack Web & Mobile Developer. React, Next.js, Node.js, PostgreSQL, React Native, Expo">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -37,7 +37,7 @@
       overflow-x: hidden;
     }
 
-    .container {
+   .container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
@@ -54,31 +54,37 @@
       z-index: 100;
     }
 
-    .nav-content {
+   .nav-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
       height: 70px;
     }
 
-    .logo {
+   .logo {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       font-size: 20px;
       letter-spacing: -0.5px;
     }
 
-    .logo span {
+   .logo span {
       color: var(--accent);
     }
 
-    .nav-links {
+   .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+   .nav-links {
       display: flex;
       gap: 32px;
       list-style: none;
     }
 
-    .nav-links a {
+   .nav-links a {
       color: var(--muted);
       text-decoration: none;
       font-size: 14px;
@@ -86,11 +92,36 @@
       transition: color 0.2s;
     }
 
-    .nav-links a:hover {
+   .nav-links a:hover {
       color: var(--text);
     }
 
-    .menu-btn {
+   .lang-switch {
+      display: flex;
+      gap: 4px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px;
+    }
+
+   .lang-btn {
+      padding: 6px 10px;
+      background: transparent;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+   .lang-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+   .menu-btn {
       display: none;
       background: none;
       border: none;
@@ -100,7 +131,7 @@
     }
 
     /* HERO */
-    .hero {
+   .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -108,7 +139,7 @@
       position: relative;
     }
 
-    .hero::before {
+   .hero::before {
       content: '';
       position: absolute;
       top: 0;
@@ -120,12 +151,12 @@
       pointer-events: none;
     }
 
-    .hero-content {
+   .hero-content {
       position: relative;
       z-index: 1;
     }
 
-    .hero-badge {
+   .hero-badge {
       display: inline-block;
       padding: 6px 14px;
       border: 1px solid var(--border);
@@ -146,24 +177,24 @@
       letter-spacing: -2px;
     }
 
-    .hero-title-accent {
+   .hero-title-accent {
       color: var(--accent);
     }
 
-    .hero-subtitle {
+   .hero-subtitle {
       font-size: clamp(16px, 3vw, 20px);
       color: var(--muted);
       max-width: 600px;
       margin-bottom: 40px;
     }
 
-    .hero-btns {
+   .hero-btns {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
     }
 
-    .btn {
+   .btn {
       padding: 14px 28px;
       border-radius: 8px;
       font-size: 14px;
@@ -177,23 +208,23 @@
       gap: 8px;
     }
 
-    .btn-primary {
+   .btn-primary {
       background: var(--accent);
       color: #fff;
     }
 
-    .btn-primary:hover {
+   .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 30px var(--accent-glow);
     }
 
-    .btn-secondary {
+   .btn-secondary {
       background: transparent;
       color: var(--text);
       border: 1px solid var(--border);
     }
 
-    .btn-secondary:hover {
+   .btn-secondary:hover {
       border-color: var(--accent);
       color: var(--accent);
     }
@@ -204,11 +235,11 @@
       border-top: 1px solid var(--border);
     }
 
-    .section-header {
+   .section-header {
       margin-bottom: 60px;
     }
 
-    .section-tag {
+   .section-tag {
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 2px;
@@ -216,7 +247,7 @@
       margin-bottom: 12px;
     }
 
-    .section-title {
+   .section-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(32px, 5vw, 48px);
       font-weight: 700;
@@ -224,37 +255,37 @@
     }
 
     /* ABOUT */
-    .about-grid {
+   .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
       align-items: start;
     }
 
-    .about-text {
+   .about-text {
       font-size: 16px;
       color: var(--muted);
       line-height: 1.8;
     }
 
-    .about-text p {
+   .about-text p {
       margin-bottom: 16px;
     }
 
-    .stats {
+   .stats {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
     }
 
-    .stat {
+   .stat {
       padding: 24px;
       background: var(--bg-light);
       border: 1px solid var(--border);
       border-radius: 12px;
     }
 
-    .stat-num {
+   .stat-num {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 36px;
       font-weight: 700;
@@ -262,19 +293,19 @@
       margin-bottom: 4px;
     }
 
-    .stat-label {
+   .stat-label {
       font-size: 13px;
       color: var(--muted);
     }
 
     /* SKILLS */
-    .skills-grid {
+   .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 24px;
     }
 
-    .skill-card {
+   .skill-card {
       padding: 32px;
       background: var(--bg-light);
       border: 1px solid var(--border);
@@ -282,12 +313,12 @@
       transition: border-color 0.2s, transform 0.2s;
     }
 
-    .skill-card:hover {
+   .skill-card:hover {
       border-color: var(--accent);
       transform: translateY(-2px);
     }
 
-    .skill-icon {
+   .skill-icon {
       width: 48px;
       height: 48px;
       background: var(--accent-glow);
@@ -299,20 +330,20 @@
       margin-bottom: 20px;
     }
 
-    .skill-title {
+   .skill-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 20px;
       font-weight: 700;
       margin-bottom: 12px;
     }
 
-    .skill-tags {
+   .skill-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
 
-    .tag {
+   .tag {
       padding: 4px 10px;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -322,13 +353,13 @@
     }
 
     /* PROJECTS */
-    .projects-grid {
+   .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 32px;
     }
 
-    .project {
+   .project {
       background: var(--bg-light);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -336,13 +367,13 @@
       transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
     }
 
-    .project:hover {
+   .project:hover {
       transform: translateY(-4px);
       border-color: var(--accent);
       box-shadow: 0 12px 32px rgba(14, 165, 233, 0.08);
     }
 
-    .project-img {
+   .project-img {
       width: 100%;
       height: 200px;
       background: linear-gradient(135deg, var(--bg-light), var(--border));
@@ -353,49 +384,49 @@
       color: var(--muted);
     }
 
-    .project-body {
+   .project-body {
       padding: 24px;
     }
 
-    .project-title {
+   .project-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 20px;
       font-weight: 700;
       margin-bottom: 8px;
     }
 
-    .project-desc {
+   .project-desc {
       font-size: 14px;
       color: var(--muted);
       margin-bottom: 16px;
       line-height: 1.6;
     }
 
-    .project-tech {
+   .project-tech {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 20px;
     }
 
-    .project-links {
+   .project-links {
       display: flex;
       gap: 12px;
     }
 
-    .project-link {
+   .project-link {
       font-size: 13px;
       color: var(--accent);
       text-decoration: none;
       font-weight: 600;
     }
 
-    .project-link:hover {
+   .project-link:hover {
       text-decoration: underline;
     }
 
     /* CONTACT */
-    .contact-box {
+   .contact-box {
       max-width: 600px;
       margin: 0 auto;
       text-align: center;
@@ -405,19 +436,19 @@
       border-radius: 16px;
     }
 
-    .contact-title {
+   .contact-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 32px;
       font-weight: 700;
       margin-bottom: 16px;
     }
 
-    .contact-text {
+   .contact-text {
       color: var(--muted);
       margin-bottom: 32px;
     }
 
-    .contact-links {
+   .contact-links {
       display: flex;
       justify-content: center;
       gap: 16px;
@@ -431,14 +462,14 @@
       border-top: 1px solid var(--border);
     }
 
-    .footer-text {
+   .footer-text {
       font-size: 13px;
       color: var(--muted);
     }
 
     /* MOBILE */
     @media (max-width: 768px) {
-      .nav-links {
+     .nav-links {
         display: none;
         position: absolute;
         top: 70px;
@@ -451,20 +482,20 @@
         gap: 20px;
       }
 
-      .nav-links.active {
+     .nav-links.active {
         display: flex;
       }
 
-      .menu-btn {
+     .menu-btn {
         display: block;
       }
 
-      .about-grid {
+     .about-grid {
         grid-template-columns: 1fr;
         gap: 40px;
       }
 
-      .stats {
+     .stats {
         grid-template-columns: 1fr;
       }
 
@@ -480,13 +511,19 @@
     <div class="container">
       <div class="nav-content">
         <div class="logo">ARSLAN<span>.</span></div>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#about">Hakynda</a></li>
-          <li><a href="#skills">Ussatlyk</a></li>
-          <li><a href="#projects">Proýektler</a></li>
-          <li><a href="#contact">Habarlaş</a></li>
-        </ul>
-        <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="nav-right">
+          <ul class="nav-links" id="navLinks">
+            <li><a href="#about" data-i18n="nav_about">About</a></li>
+            <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+            <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+            <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+          </ul>
+          <div class="lang-switch">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+          </div>
+          <button class="menu-btn" id="menuBtn">☰</button>
+        </div>
       </div>
     </div>
   </nav>
@@ -494,15 +531,15 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-badge">TÜRKMENISTAN • FULLSTACK DEVELOPER</div>
-        <h1>Salam, men <span class="hero-title-accent">Arslan Gurbanow</span></h1>
-        <p class="hero-subtitle">
-          React, Next.js, Node.js, PostgreSQL, React Native we Expo bilen web we mobil programmalar döredýärin. 
-          Ideýany doly önüme öwürýän fullstack programist.
+        <div class="hero-badge" data-i18n="hero_badge">TURKMENISTAN • FULLSTACK DEVELOPER</div>
+        <h1><span data-i18n="hero_greeting">Hi, I'm</span> <span class="hero-title-accent">Arslan Gurbanow</span></h1>
+        <p class="hero-subtitle" data-i18n="hero_subtitle">
+          I build web and mobile applications with React, Next.js, Node.js, PostgreSQL, React Native and Expo.
+          Fullstack developer turning ideas into complete products.
         </p>
         <div class="hero-btns">
-          <a href="#projects" class="btn btn-primary">Proýektleri gör →</a>
-          <a href="#contact" class="btn btn-secondary">Habarlaş</a>
+          <a href="#projects" class="btn btn-primary" data-i18n="hero_btn_projects">View Projects →</a>
+          <a href="#contact" class="btn btn-secondary" data-i18n="hero_btn_contact">Contact Me</a>
         </div>
       </div>
     </div>
@@ -511,31 +548,31 @@
   <section id="about">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">HAKYNDA</div>
-        <h2 class="section-title">Kim men</h2>
+        <div class="section-tag" data-i18n="about_tag">ABOUT</div>
+        <h2 class="section-title" data-i18n="about_title">Who I Am</h2>
       </div>
       <div class="about-grid">
-        <div class="about-text">
-          <p>Men Türkmenistandan web we mobil programist. 4+ ýyl bäri React ekosistemasynda işleýärin.</p>
+        <div class="about-text" data-i18n="about_text">
+          <p>I'm a web and mobile developer from Turkmenistan. 4+ years working in the React ecosystem.</p>
           <p>Frontend: React, Next.js, TypeScript. Backend: Node.js, Express, PostgreSQL, Prisma. Mobile: React Native, Expo.</p>
-          <p>Häzirki wagtda freelance we startup proýektler bilen işleýärin. Maksadym - arassa kod, çalt önüm, hakyky netije.</p>
+          <p>Currently working on freelance and startup projects. My goal - clean code, fast delivery, real results.</p>
         </div>
         <div class="stats">
           <div class="stat">
             <div class="stat-num">4+</div>
-            <div class="stat-label">Ýyl tejribe</div>
+            <div class="stat-label" data-i18n="stat_exp">Years Experience</div>
           </div>
           <div class="stat">
             <div class="stat-num">20+</div>
-            <div class="stat-label">Tamamlanan proýekt</div>
+            <div class="stat-label" data-i18n="stat_projects">Projects Completed</div>
           </div>
           <div class="stat">
             <div class="stat-num">Full</div>
-            <div class="stat-label">Stack dereje</div>
+            <div class="stat-label" data-i18n="stat_stack">Stack Level</div>
           </div>
           <div class="stat">
             <div class="stat-num">24/7</div>
-            <div class="stat-label">Işe taýar</div>
+            <div class="stat-label" data-i18n="stat_available">Available</div>
           </div>
         </div>
       </div>
@@ -545,8 +582,8 @@
   <section id="skills">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">USSATLYK</div>
-        <h2 class="section-title">Tehnologiýalar</h2>
+        <div class="section-tag" data-i18n="skills_tag">SKILLS</div>
+        <h2 class="section-title" data-i18n="skills_title">Technologies</h2>
       </div>
       <div class="skills-grid">
         <div class="skill-card">
@@ -592,15 +629,15 @@
   <section id="projects">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">PROÝEKTLER</div>
-        <h2 class="section-title">Soňky işlerim</h2>
+        <div class="section-tag" data-i18n="projects_tag">PROJECTS</div>
+        <h2 class="section-title" data-i18n="projects_title">Recent Work</h2>
       </div>
       <div class="projects-grid">
         <div class="project">
           <div class="project-img">📱</div>
           <div class="project-body">
             <h3 class="project-title">Zaman App</h3>
-            <p class="project-desc">Türkmenistan üçin habar we hyzmat platformasy. React Native, Expo, PostgreSQL.</p>
+            <p class="project-desc" data-i18n="project1_desc">News and services platform for Turkmenistan. React Native, Expo, PostgreSQL.</p>
             <div class="project-tech">
               <span class="tag">React Native</span>
               <span class="tag">Expo</span>
@@ -616,7 +653,7 @@
           <div class="project-img">💻</div>
           <div class="project-body">
             <h3 class="project-title">E-Commerce Dashboard</h3>
-            <p class="project-desc">Admin panel. Next.js, Prisma, PostgreSQL. Real-time analitika.</p>
+            <p class="project-desc" data-i18n="project2_desc">Admin panel. Next.js, Prisma, PostgreSQL. Real-time analytics.</p>
             <div class="project-tech">
               <span class="tag">Next.js</span>
               <span class="tag">Prisma</span>
@@ -632,7 +669,7 @@
           <div class="project-img">🚀</div>
           <div class="project-body">
             <h3 class="project-title">API Service</h3>
-            <p class="project-desc">Node.js REST API. JWT auth, rate limiting, PostgreSQL.</p>
+            <p class="project-desc" data-i18n="project3_desc">Node.js REST API. JWT auth, rate limiting, PostgreSQL.</p>
             <div class="project-tech">
               <span class="tag">Node.js</span>
               <span class="tag">Express</span>
@@ -651,13 +688,13 @@
   <section id="contact">
     <div class="container">
       <div class="contact-box">
-        <h2 class="contact-title">Bile işleşeliň</h2>
-        <p class="contact-text">
-          Proýektiň bar bolsa ýa-da sorag bar bolsa, habarlaş. 24 sagadyň içinde jogap berýärin.
+        <h2 class="contact-title" data-i18n="contact_title">Let's Work Together</h2>
+        <p class="contact-text" data-i18n="contact_text">
+          Have a project or question? Get in touch. I reply within 24 hours.
         </p>
         <div class="contact-links">
-          <a href="mailto:arslan03022002@gmail.com" class="btn btn-primary">Email iber</a>
-          <a href="tel:+99361006434" class="btn btn-secondary">Jaň et</a>
+          <a href="mailto:arslan03022002@gmail.com" class="btn btn-primary">Email</a>
+          <a href="tel:+99361006434" class="btn btn-secondary">+993 61 006434</a>
           <a href="https://t.me/ArslanWebDev" target="_blank" class="btn btn-secondary">Telegram</a>
           <a href="https://github.com/arslangurbanow" target="_blank" class="btn btn-secondary">GitHub</a>
         </div>
@@ -667,14 +704,103 @@
 
   <footer>
     <div class="container">
-      <p class="footer-text">© 2026 Arslan Gurbanow. Ähli hukuklar goralan.</p>
+      <p class="footer-text">© 2026 Arslan Gurbanow. <span data-i18n="footer_rights">All rights reserved.</span></p>
     </div>
   </footer>
 
   <script>
+    // Translations
+    const translations = {
+      en: {
+        nav_about: "About",
+        nav_skills: "Skills",
+        nav_projects: "Projects",
+        nav_contact: "Contact",
+        hero_badge: "TURKMENISTAN • FULLSTACK DEVELOPER",
+        hero_greeting: "Hi, I'm",
+        hero_subtitle: "I build web and mobile applications with React, Next.js, Node.js, PostgreSQL, React Native and Expo. Fullstack developer turning ideas into complete products.",
+        hero_btn_projects: "View Projects →",
+        hero_btn_contact: "Contact Me",
+        about_tag: "ABOUT",
+        about_title: "Who I Am",
+        about_text: `<p>I'm a web and mobile developer from Turkmenistan. 4+ years working in the React ecosystem.</p><p>Frontend: React, Next.js, TypeScript. Backend: Node.js, Express, PostgreSQL, Prisma. Mobile: React Native, Expo.</p><p>Currently working on freelance and startup projects. My goal - clean code, fast delivery, real results.</p>`,
+        stat_exp: "Years Experience",
+        stat_projects: "Projects Completed",
+        stat_stack: "Stack Level",
+        stat_available: "Available",
+        skills_tag: "SKILLS",
+        skills_title: "Technologies",
+        projects_tag: "PROJECTS",
+        projects_title: "Recent Work",
+        project1_desc: "News and services platform for Turkmenistan. React Native, Expo, PostgreSQL.",
+        project2_desc: "Admin panel. Next.js, Prisma, PostgreSQL. Real-time analytics.",
+        project3_desc: "Node.js REST API. JWT auth, rate limiting, PostgreSQL.",
+        contact_title: "Let's Work Together",
+        contact_text: "Have a project or question? Get in touch. I reply within 24 hours.",
+        footer_rights: "All rights reserved."
+      },
+      ru: {
+        nav_about: "Обо мне",
+        nav_skills: "Навыки",
+        nav_projects: "Проекты",
+        nav_contact: "Контакты",
+        hero_badge: "ТУРКМЕНИСТАН • FULLSTACK РАЗРАБОТЧИК",
+        hero_greeting: "Привет, я",
+        hero_subtitle: "Создаю веб и мобильные приложения на React, Next.js, Node.js, PostgreSQL, React Native и Expo. Fullstack разработчик, превращающий идеи в готовые продукты.",
+        hero_btn_projects: "Смотреть проекты →",
+        hero_btn_contact: "Связаться",
+        about_tag: "ОБО МНЕ",
+        about_title: "Кто я",
+        about_text: `<p>Я веб и мобильный разработчик из Туркменистана. 4+ года работаю в экосистеме React.</p><p>Frontend: React, Next.js, TypeScript. Backend: Node.js, Express, PostgreSQL, Prisma. Mobile: React Native, Expo.</p><p>Сейчас работаю над фриланс и стартап проектами. Моя цель - чистый код, быстрая разработка, реальный результат.</p>`,
+        stat_exp: "Лет опыта",
+        stat_projects: "Завершенных проектов",
+        stat_stack: "Уровень стека",
+        stat_available: "Доступен",
+        skills_tag: "НАВЫКИ",
+        skills_title: "Технологии",
+        projects_tag: "ПРОЕКТЫ",
+        projects_title: "Последние работы",
+        project1_desc: "Платформа новостей и услуг для Туркменистана. React Native, Expo, PostgreSQL.",
+        project2_desc: "Админ панель. Next.js, Prisma, PostgreSQL. Аналитика в реальном времени.",
+        project3_desc: "Node.js REST API. JWT аутентификация, rate limiting, PostgreSQL.",
+        contact_title: "Давайте работать вместе",
+        contact_text: "Есть проект или вопрос? Напишите мне. Отвечаю в течение 24 часов.",
+        footer_rights: "Все права защищены."
+      }
+    };
+
+    // Language switch
+    let currentLang = 'en';
+    const langBtns = document.querySelectorAll('.lang-btn');
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      langBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          if (key === 'about_text') {
+            el.innerHTML = translations[lang][key];
+          } else {
+            el.textContent = translations[lang][key];
+          }
+        }
+      });
+    }
+
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    // Mobile menu
     const menuBtn = document.getElementById('menuBtn');
     const navLinks = document.getElementById('navLinks');
-    
+
     menuBtn.addEventListener('click', () => {
       navLinks.classList.toggle('active');
     });
@@ -685,6 +811,7 @@
       });
     });
 
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -703,6 +830,9 @@
         }
       });
     });
+
+    // Init
+    setLanguage('en');
   </script>
 
 </body>

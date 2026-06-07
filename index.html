@@ -1,668 +1,1285 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Arslan Gurbanow | Fullstack Developer – Modern Portfolio</title>
-  <meta name="description" content="Arslan Gurbanow - Fullstack Web & Mobile Developer. React, Next.js, Node.js, PostgreSQL, React Native, Expo. Modern animations & responsive design.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SowdaKarz — Söwda & Karz Dolandyryş Programması</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #0f0f1a;
+    --surface: #13131f;
+    --surface2: #1a1a2e;
+    --border: rgba(255,255,255,0.07);
+    --accent: #00e5ff;
+    --accent2: #7c4dff;
+    --accent3: #00ff88;
+    --text: #f0f0ff;
+    --text2: #8888aa;
+    --text3: #555577;
+    --gold: #ffd700;
+    --glow: rgba(0,229,255,0.15);
+    --glow2: rgba(124,77,255,0.15);
+  }
 
-    :root {
-      --bg: #ffffff;
-      --bg-soft: #fbfdff;
-      --surface: #ffffffcc;
-      --text: #0b1120;
-      --muted: #475569;
-      --border: rgba(203, 213, 225, 0.5);
-      --accent: #0ea5e9;
-      --accent-dark: #0284c7;
-      --accent-glow: rgba(14, 165, 233, 0.2);
-      --card-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
-      --transition-smooth: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    }
+  * { margin:0; padding:0; box-sizing:border-box; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
+  html { scroll-behavior: smooth; }
 
-    /* animated background gradient orbs */
-    body::before {
-      content: '';
-      position: fixed;
-      top: -20%;
-      left: -10%;
-      width: 120%;
-      height: 120%;
-      background: radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.03) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 70%, rgba(14, 165, 233, 0.04) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: -2;
-      animation: breatheGlow 14s infinite alternate;
-    }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
 
-    @keyframes breatheGlow {
-      0% { opacity: 0.5; transform: scale(1);}
-      100% { opacity: 1; transform: scale(1.08);}
-    }
+  /* ── GRAIN ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
 
-    /* floating shapes */
-    .blob {
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, rgba(14, 165, 233, 0) 70%);
-      border-radius: 50%;
-      filter: blur(60px);
-      z-index: -1;
-      animation: floatBlob 18s infinite alternate;
-      pointer-events: none;
-    }
-    .blob-1 { top: -150px; left: -150px; animation-duration: 24s; }
-    .blob-2 { bottom: -100px; right: -100px; animation-duration: 20s; animation-delay: -5s; }
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 6%;
+    display: flex; align-items: center; justify-content: space-between;
+    backdrop-filter: blur(20px);
+    background: rgba(10,10,15,0.85);
+    border-bottom: 1px solid var(--border);
+  }
 
-    @keyframes floatBlob {
-      0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-      100% { transform: translate(40px, 40px) scale(1.2); opacity: 0.7; }
-    }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 28px;
-    }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
 
-    /* nav glassmorphic */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,0.6);
-      box-shadow: 0 8px 24px -12px rgba(0,0,0,0.05);
-      z-index: 1000;
-      transition: all 0.3s;
-    }
-    .nav-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 76px;
-    }
-    .logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 26px;
-      letter-spacing: -0.8px;
-      background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      transition: transform 0.2s;
-    }
-    .logo:hover { transform: scale(1.02); }
-    .logo span { background: none; color: var(--accent); background-clip: unset; -webkit-background-clip: unset; }
-    .nav-right { display: flex; align-items: center; gap: 32px; }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      transition: var(--transition-smooth);
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: width 0.25s ease;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { width: 100%; }
-    .lang-switch {
-      display: flex;
-      gap: 6px;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(4px);
-      border: 1px solid var(--border);
-      border-radius: 40px;
-      padding: 4px 8px;
-    }
-    .lang-btn {
-      padding: 6px 14px;
-      background: transparent;
-      border: none;
-      border-radius: 32px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .lang-btn.active {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 4px 8px var(--accent-glow);
-    }
-    .menu-btn { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--text); }
+  .nav-cta {
+    background: var(--accent);
+    color: #000;
+    padding: 9px 22px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: #33ecff; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,229,255,0.35); }
 
-    /* hero section animation */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding-top: 80px;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      animation: fadeInUp 0.8s ease-out;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(35px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero-badge {
-      display: inline-block;
-      padding: 6px 18px;
-      background: rgba(14, 165, 233, 0.08);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(14, 165, 233, 0.2);
-      border-radius: 60px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 28px;
-      letter-spacing: 0.3px;
-      animation: pulseGlow 2s infinite;
-    }
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.2); }
-      70% { box-shadow: 0 0 0 10px rgba(14, 165, 233, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
-    }
-    h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(42px, 9vw, 80px);
-      font-weight: 700;
-      line-height: 1.08;
-      margin-bottom: 24px;
-      letter-spacing: -2px;
-    }
-    .hero-title-accent { color: var(--accent); position: relative; display: inline-block; }
-    .hero-subtitle {
-      font-size: clamp(17px, 3.5vw, 21px);
-      color: var(--muted);
-      max-width: 620px;
-      margin-bottom: 44px;
-    }
-    .btn {
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: var(--transition-smooth);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      border: none;
-      backdrop-filter: blur(4px);
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 6px 14px var(--accent-glow);
-    }
-    .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 18px 28px -12px var(--accent); background: var(--accent-dark); }
-    .btn-secondary {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(8px);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); background: white; }
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 6% 80px;
+    position: relative;
+    overflow: hidden;
+  }
 
-    /* sections common */
-    section { padding: 110px 0; border-top: none; position: relative; z-index: 2; }
-    .section-header { margin-bottom: 60px; }
-    .section-tag {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(32px, 5vw, 48px);
-      font-weight: 700;
-      letter-spacing: -1px;
-      background: linear-gradient(to right, var(--text), #1e293b);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
+  /* 3D rotating orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    animation: orbFloat linear infinite;
+  }
+  .orb1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,229,255,0.18), transparent 70%); top: -100px; right: -100px; animation-duration: 20s; }
+  .orb2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(124,77,255,0.2), transparent 70%); bottom: -50px; left: -80px; animation-duration: 25s; animation-direction: reverse; }
+  .orb3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,255,136,0.1), transparent 70%); top: 40%; left: 50%; transform: translate(-50%,-50%); animation-duration: 15s; }
 
-    /* reveal on scroll */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(42px);
-      transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  @keyframes orbFloat {
+    0% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-30px) rotate(120deg); }
+    66% { transform: translateY(20px) rotate(240deg); }
+    100% { transform: translateY(0) rotate(360deg); }
+  }
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-    }
-    .about-text { font-size: 16px; color: var(--muted); line-height: 1.75; }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
-    }
-    .stat {
-      padding: 28px 18px;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.8);
-      border-radius: 24px;
-      transition: var(--transition-smooth);
-      box-shadow: var(--card-shadow);
-    }
-    .stat:hover { transform: translateY(-6px); border-color: var(--accent); background: rgba(255,255,255,0.85); }
-    .stat-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 42px;
-      font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-    .stat-label { font-size: 13px; font-weight: 500; color: var(--muted); letter-spacing: 0.3px; }
+  /* 3D Phone mockup */
+  .phone-scene {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    perspective: 1200px;
+  }
 
-    /* skills glass cards */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 32px;
-    }
-    .skill-card {
-      padding: 36px 28px;
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.7);
-      border-radius: 32px;
-      transition: var(--transition-smooth);
-      box-shadow: 0 8px 20px -8px rgba(0,0,0,0.05);
-    }
-    .skill-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-8px);
-      background: rgba(255,255,255,0.8);
-      box-shadow: 0 28px 38px -18px rgba(14, 165, 233, 0.25);
-    }
-    .skill-icon {
-      width: 58px;
-      height: 58px;
-      background: radial-gradient(circle at 30% 20%, var(--accent-glow), transparent);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      margin-bottom: 24px;
-      transition: 0.2s;
-    }
-    .skill-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 18px; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-    .tag {
-      padding: 6px 14px;
-      background: rgba(255,255,255,0.7);
-      border: 1px solid var(--border);
-      border-radius: 40px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text);
-      transition: 0.2s;
-    }
-    .tag:hover { background: var(--accent); color: white; border-color: var(--accent); transform: scale(1.02); }
+  .phone-3d {
+    width: 220px;
+    height: 440px;
+    background: linear-gradient(145deg, #1e1e35, #12121e);
+    border-radius: 36px;
+    border: 1.5px solid rgba(0,229,255,0.3);
+    box-shadow:
+      0 0 40px rgba(0,229,255,0.15),
+      0 40px 80px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(255,255,255,0.1);
+    transform: rotateY(-25deg) rotateX(8deg);
+    animation: phoneFloat 6s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+  }
 
-    /* projects 3d hover */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 38px;
-    }
-    .project {
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.6);
-      border-radius: 28px;
-      overflow: hidden;
-      transition: all 0.35s ease;
-      box-shadow: var(--card-shadow);
-    }
-    .project:hover {
-      transform: translateY(-12px) scale(1.01);
-      border-color: var(--accent);
-      box-shadow: 0 32px 44px -20px rgba(14, 165, 233, 0.3);
-    }
-    .project-img {
-      width: 100%;
-      height: 210px;
-      background: linear-gradient(125deg, #eef2ff, #e0e7ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 64px;
-      transition: transform 0.5s;
-    }
-    .project:hover .project-img { transform: scale(1.02); }
-    .project-body { padding: 28px; }
-    .project-title { font-size: 24px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; margin-bottom: 12px; }
-    .project-desc { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
-    .project-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .project-links { display: flex; gap: 20px; }
-    .project-link { font-weight: 600; font-size: 14px; color: var(--accent); text-decoration: none; border-bottom: 1px dotted transparent; transition: 0.2s; }
-    .project-link:hover { border-bottom-color: var(--accent); }
+  @keyframes phoneFloat {
+    0%,100% { transform: rotateY(-25deg) rotateX(8deg) translateY(0); }
+    50% { transform: rotateY(-20deg) rotateX(5deg) translateY(-18px); }
+  }
 
-    /* contact glass */
-    .contact-box {
-      max-width: 660px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 60px 48px;
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.8);
-      border-radius: 48px;
-      transition: 0.3s;
-    }
-    .contact-box:hover { border-color: var(--accent); box-shadow: 0 28px 44px -16px rgba(14,165,233,0.15); }
-    .contact-title { font-family: 'Space Grotesk', sans-serif; font-size: 38px; font-weight: 700; margin-bottom: 20px; }
-    .contact-text { color: var(--muted); margin-bottom: 36px; font-size: 17px; }
-    .contact-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
+  .phone-screen {
+    position: absolute;
+    inset: 10px;
+    background: var(--bg);
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    padding: 14px 10px;
+    gap: 6px;
+  }
 
-    footer {
-      padding: 48px 0;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      background: rgba(255,255,255,0.4);
-      backdrop-filter: blur(8px);
-    }
-    .footer-text { font-size: 14px; color: var(--muted); }
+  .phone-notch {
+    width: 60px; height: 16px;
+    background: #000;
+    border-radius: 10px;
+    margin: 0 auto 10px;
+    position: relative;
+    z-index: 2;
+  }
 
-    @media (max-width: 768px) {
-      .nav-links { display: none; position: absolute; top: 76px; left: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); flex-direction: column; padding: 30px 28px; gap: 28px; border-bottom: 1px solid var(--border); border-radius: 0 0 28px 28px; }
-      .nav-links.active { display: flex; }
-      .menu-btn { display: block; }
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .stats { grid-template-columns: 1fr 1fr; gap: 16px; }
-      section { padding: 70px 0; }
-      .hero { min-height: 90vh; }
-      .contact-box { padding: 40px 20px; }
-    }
-    @media (max-width: 480px) {
-      .stats { grid-template-columns: 1fr; }
-    }
-    ::selection { background: var(--accent); color: white; }
-    html { scroll-padding-top: 90px; }
-  </style>
+  .phone-stat { background: var(--surface2); border-radius: 12px; padding: 8px 10px; border: 1px solid var(--border); }
+  .phone-stat-label { font-size: 7px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; }
+  .phone-stat-val { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--accent); }
+
+  .phone-row { display: flex; gap: 5px; }
+  .phone-row .phone-stat { flex: 1; }
+
+  .phone-bar { height: 6px; background: var(--surface2); border-radius: 10px; overflow: hidden; }
+  .phone-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 10px; animation: barAnim 3s ease-in-out infinite alternate; }
+  @keyframes barAnim { from { width: 45%; } to { width: 78%; } }
+
+  .phone-list-item {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 7px 9px;
+    display: flex; align-items: center; justify-content: space-between;
+    border: 1px solid var(--border);
+    font-size: 7px;
+  }
+  .phone-list-item .name { color: var(--text); font-weight: 500; }
+  .phone-list-item .amount { color: var(--accent3); font-weight: 600; }
+
+  .phone-glow {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), transparent 50%, rgba(124,77,255,0.05));
+    pointer-events: none;
+  }
+
+  /* Hero text */
+  .hero-content {
+    max-width: 680px;
+    text-align: left;
+    z-index: 2;
+    margin-right: auto;
+    padding-left: 2%;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.2);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 28px;
+    font-weight: 500;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+
+  .hero-title .line2 {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 60%, var(--accent3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--text2);
+    max-width: 500px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.7s ease 0.2s both;
+    line-height: 1.7;
+  }
+
+  .hero-ctas {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(0,229,255,0.2);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,229,255,0.35); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: var(--text);
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+
+  .hero-stats {
+    display: flex; gap: 32px;
+    margin-top: 48px;
+    animation: fadeUp 0.7s ease 0.4s both;
+  }
+  .hero-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .hero-stat-num span { color: var(--accent); }
+  .hero-stat-lbl { font-size: 0.8rem; color: var(--text3); margin-top: 2px; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 6%; position: relative; }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    color: var(--text2);
+    font-size: 1rem;
+    max-width: 520px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 56px;
+  }
+
+  /* ── FEATURES ── */
+  #features { background: var(--bg); }
+
+  .features-header { max-width: 600px; }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .feat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: all 0.4s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,229,255,0.04), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .feat-card:hover {
+    border-color: rgba(0,229,255,0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(0,229,255,0.06);
+  }
+  .feat-card:hover::before { opacity: 1; }
+
+  .feat-card.wide { grid-column: span 2; }
+
+  .feat-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  .feat-icon.blue { background: rgba(0,229,255,0.1); }
+  .feat-icon.purple { background: rgba(124,77,255,0.12); }
+  .feat-icon.green { background: rgba(0,255,136,0.1); }
+  .feat-icon.gold { background: rgba(255,215,0,0.1); }
+
+  .feat-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+  .feat-desc { color: var(--text2); font-size: 0.9rem; line-height: 1.65; font-weight: 300; }
+
+  .feat-tag {
+    display: inline-block;
+    background: rgba(0,255,136,0.1);
+    color: var(--accent3);
+    border: 1px solid rgba(0,255,136,0.2);
+    padding: 3px 12px;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-top: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Wide card mini-dashboard */
+  .mini-dash {
+    display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;
+  }
+  .mini-stat {
+    flex: 1;
+    min-width: 100px;
+    background: var(--surface2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+  }
+  .mini-stat-lbl { font-size: 0.7rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; }
+  .mini-stat-val { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-top: 4px; }
+  .mini-stat-val.cyan { color: var(--accent); }
+  .mini-stat-val.purple { color: var(--accent2); }
+  .mini-stat-val.green { color: var(--accent3); }
+
+  /* ── PRICING ── */
+  #pricing { background: var(--bg2); }
+
+  .pricing-label-row {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 12px;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 36px 32px;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .price-card:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+  .price-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(160deg, rgba(0,229,255,0.06), var(--surface));
+    box-shadow: 0 0 50px rgba(0,229,255,0.08);
+  }
+
+  .price-badge {
+    position: absolute;
+    top: -14px; right: 24px;
+    background: var(--accent);
+    color: #000;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+  }
+
+  .price-tier { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); font-weight: 600; margin-bottom: 8px; }
+  .price-name { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
+
+  .price-amount {
+    display: flex; align-items: baseline; gap: 6px;
+    margin: 24px 0 8px;
+  }
+  .price-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text);
+  }
+  .price-number.featured-num { color: var(--accent); }
+  .price-currency { font-size: 1rem; color: var(--text2); font-weight: 500; margin-bottom: 4px; }
+  .price-period { font-size: 0.85rem; color: var(--text3); font-weight: 300; }
+
+  .price-divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .price-features li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.9rem; color: var(--text2); font-weight: 300;
+  }
+  .price-features .ck {
+    width: 18px; height: 18px; min-width: 18px;
+    background: rgba(0,255,136,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; color: var(--accent3);
+  }
+
+  .price-btn {
+    display: block;
+    text-align: center;
+    margin-top: 28px;
+    padding: 13px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+  .price-btn.outlined {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+  }
+  .price-btn.outlined:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.04); }
+  .price-btn.filled {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    box-shadow: 0 6px 25px rgba(0,229,255,0.25);
+  }
+  .price-btn.filled:hover { box-shadow: 0 10px 35px rgba(0,229,255,0.4); transform: translateY(-1px); }
+
+  /* Renewal discount info */
+  .renewal-box {
+    max-width: 820px;
+    margin: 24px auto 0;
+    background: rgba(0,255,136,0.05);
+    border: 1px solid rgba(0,255,136,0.15);
+    border-radius: 16px;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .renewal-icon { font-size: 1.4rem; }
+  .renewal-text { font-size: 0.9rem; color: var(--text2); line-height: 1.5; }
+  .renewal-text strong { color: var(--accent3); font-weight: 600; }
+
+  /* ── REFERRAL SECTION ── */
+  #referral {
+    background: var(--bg);
+  }
+
+  .referral-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .ref-visual {
+    position: relative;
+    height: 380px;
+  }
+
+  .ref-card {
+    position: absolute;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 22px 26px;
+    width: 260px;
+  }
+  .ref-card.card1 { top: 0; left: 0; border-color: rgba(0,229,255,0.25); animation: cardBob 4s ease-in-out infinite; }
+  .ref-card.card2 { bottom: 0; right: 0; border-color: rgba(124,77,255,0.25); animation: cardBob 4s ease-in-out 1.5s infinite; }
+  .ref-card.card3 { top: 50%; left: 50%; transform: translate(-50%,-50%); border-color: rgba(0,255,136,0.25); animation: cardBob 4s ease-in-out 0.8s infinite; width: 220px; }
+
+  @keyframes cardBob {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .ref-card.card3 {
+    animation: cardBob3 4s ease-in-out 0.8s infinite;
+  }
+  @keyframes cardBob3 {
+    0%,100% { transform: translate(-50%,-50%) translateY(0); }
+    50% { transform: translate(-50%,-50%) translateY(-10px); }
+  }
+
+  .ref-card-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text3); margin-bottom: 8px; }
+  .ref-code {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+  }
+  .ref-code.c1 { color: var(--accent); }
+  .ref-code.c2 { color: var(--accent2); }
+  .ref-discount { margin-top: 8px; font-size: 0.85rem; color: var(--text2); }
+  .ref-discount strong { color: var(--accent3); }
+
+  .ref-connector {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 2px;
+    height: 140px;
+    background: linear-gradient(to bottom, rgba(0,229,255,0.4), rgba(124,77,255,0.4));
+    transform: translate(-50%, -50%) rotate(45deg);
+    transform-origin: center;
+  }
+
+  .ref-content { }
+  .ref-steps { display: flex; flex-direction: column; gap: 24px; margin-top: 32px; }
+  .ref-step { display: flex; gap: 18px; align-items: flex-start; }
+  .ref-step-num {
+    width: 36px; height: 36px; min-width: 36px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .ref-step-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+  .ref-step-desc { color: var(--text2); font-size: 0.87rem; font-weight: 300; line-height: 1.6; }
+
+  /* ── HOW IT WORKS ── */
+  #how {
+    background: var(--bg2);
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    position: relative;
+  }
+
+  .steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 38px; left: calc(12.5%);
+    width: 75%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+    z-index: 0;
+  }
+
+  .step-card {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 24px 16px;
+  }
+
+  .step-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,229,255,0.3);
+    background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent);
+    position: relative;
+  }
+
+  .step-num::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0,229,255,0.15);
+    animation: spin 10s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .step-title { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+  .step-desc { font-size: 0.83rem; color: var(--text2); line-height: 1.65; font-weight: 300; }
+
+  /* ── TRUST ── */
+  #trust {
+    background: var(--bg);
+    padding: 80px 6%;
+  }
+
+  .trust-inner {
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 60px 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trust-inner::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,229,255,0.06), transparent 60%);
+    pointer-events: none;
+  }
+
+  .trust-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .trust-num span { color: var(--accent); }
+  .trust-lbl { font-size: 0.85rem; color: var(--text2); margin-top: 6px; font-weight: 300; }
+
+  /* ── CTA ── */
+  #cta {
+    padding: 100px 6%;
+    text-align: center;
+    background: var(--bg2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #cta::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(124,77,255,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .cta-title span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .cta-sub { color: var(--text2); font-size: 1rem; max-width: 480px; margin: 0 auto 40px; font-weight: 300; line-height: 1.7; }
+
+  .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 40px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  footer p { color: var(--text3); font-size: 0.83rem; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: var(--text3); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text2); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    overflow: hidden;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    white-space: nowrap;
+  }
+  .ticker {
+    display: inline-flex;
+    animation: ticker 25s linear infinite;
+  }
+  .ticker-item {
+    margin: 0 40px;
+    font-size: 0.82rem;
+    color: var(--text3);
+    display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 400;
+  }
+  .ticker-item .dot { color: var(--accent); }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .feat-card.wide { grid-column: span 1; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+    .referral-wrapper { grid-template-columns: 1fr; }
+    .ref-visual { height: 280px; }
+    .steps-grid { grid-template-columns: repeat(2,1fr); }
+    .steps-grid::before { display: none; }
+    .trust-inner { grid-template-columns: repeat(2,1fr); }
+    .phone-scene { display: none; }
+    .hero-content { max-width: 100%; padding-left: 0; }
+    .hero-title { font-size: 2.6rem; }
+  }
+
+  @media (max-width: 580px) {
+    nav { padding: 16px 5%; }
+    .nav-links { display: none; }
+    section { padding: 70px 5%; }
+    .features-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .trust-inner { grid-template-columns: 1fr 1fr; padding: 36px 24px; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .footer-links { flex-wrap: wrap; }
+    .ref-visual { height: 240px; }
+    .ref-card { width: 200px; padding: 16px 18px; }
+    .ref-code { font-size: 1.3rem; }
+  }
+</style>
 </head>
 <body>
-<div class="blob blob-1"></div>
-<div class="blob blob-2"></div>
 
+<!-- ── NAVBAR ── -->
 <nav>
-  <div class="container">
-    <div class="nav-content">
-      <div class="logo">ARSLAN<span>.</span></div>
-      <div class="nav-right">
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#about" data-i18n="nav_about">About</a></li>
-          <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
-          <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
-          <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-        </ul>
-        <div class="lang-switch">
-          <button class="lang-btn active" data-lang="en">EN</button>
-          <button class="lang-btn" data-lang="ru">RU</button>
-        </div>
-        <button class="menu-btn" id="menuBtn">☰</button>
-      </div>
-    </div>
-  </div>
+  <span class="nav-logo">⚡ SowdaKarz</span>
+  <ul class="nav-links">
+    <li><a href="#features">Mümkinçilikler</a></li>
+    <li><a href="#pricing">Bahalar</a></li>
+    <li><a href="#referral">Referral</a></li>
+    <li><a href="#how">Nähili işleýär</a></li>
+  </ul>
+  <a href="#pricing" class="nav-cta">Almak</a>
 </nav>
 
-<section class="hero">
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge" data-i18n="hero_badge">TURKMENISTAN • FULLSTACK DEVELOPER</div>
-      <h1><span data-i18n="hero_greeting">Hi, I'm</span> <span class="hero-title-accent">Arslan Gurbanow</span></h1>
-      <p class="hero-subtitle" data-i18n="hero_subtitle">
-        I build web and mobile applications with React, Next.js, Node.js, PostgreSQL, React Native and Expo.
-        Fullstack developer turning ideas into complete products.
-      </p>
-      <div class="hero-btns">
-        <a href="#projects" class="btn btn-primary" data-i18n="hero_btn_projects">View Projects →</a>
-        <a href="#contact" class="btn btn-secondary" data-i18n="hero_btn_contact">Contact Me</a>
+<!-- ── TICKER ── -->
+<div class="ticker-wrap" style="margin-top:70px;">
+  <div class="ticker">
+    <span class="ticker-item"><span class="dot">●</span> Offline işleýär — internet gerek däl</span>
+    <span class="ticker-item"><span class="dot">●</span> QR / Ştrik kod skanerleme</span>
+    <span class="ticker-item"><span class="dot">●</span> Karz depderini çalyş — sanly ulgama geç</span>
+    <span class="ticker-item"><span class="dot">●</span> PDF hasabat çykarmak</span>
+    <span class="ticker-item"><span class="dot">●</span> Türkmençe & Rusça dil goldawy</span>
+    <span class="ticker-item"><span class="dot">●</span> Garaňky & Açyk tema</span>
+    <span class="ticker-item"><span class="dot">●</span> Offline işleýär — internet gerek däl</span>
+    <span class="ticker-item"><span class="dot">●</span> QR / Ştrik kod skanerleme</span>
+    <span class="ticker-item"><span class="dot">●</span> Karz depderini çalyş — sanly ulgama geç</span>
+    <span class="ticker-item"><span class="dot">●</span> PDF hasabat çykarmak</span>
+    <span class="ticker-item"><span class="dot">●</span> Türkmençe & Rusça dil goldawy</span>
+    <span class="ticker-item"><span class="dot">●</span> Garaňky & Açyk tema</span>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <!-- 3D Phone -->
+  <div class="phone-scene">
+    <div class="phone-3d">
+      <div class="phone-glow"></div>
+      <div class="phone-screen">
+        <div class="phone-notch"></div>
+        <div class="phone-stat">
+          <div class="phone-stat-label">Günlük girdeji</div>
+          <div class="phone-stat-val">2 840 TMT</div>
+        </div>
+        <div class="phone-row">
+          <div class="phone-stat">
+            <div class="phone-stat-label">Sowda</div>
+            <div class="phone-stat-val" style="color:#7c4dff;font-size:14px">47</div>
+          </div>
+          <div class="phone-stat">
+            <div class="phone-stat-label">Karz</div>
+            <div class="phone-stat-val" style="color:#ff6b35;font-size:14px">12</div>
+          </div>
+        </div>
+        <div class="phone-bar"><div class="phone-bar-fill" style="width:62%"></div></div>
+        <div class="phone-list-item">
+          <span class="name">Ahmet A.</span>
+          <span class="amount">150 TMT</span>
+        </div>
+        <div class="phone-list-item">
+          <span class="name">Merdan B.</span>
+          <span class="amount">320 TMT</span>
+        </div>
+        <div class="phone-list-item">
+          <span class="name">Oguljan Ý.</span>
+          <span class="amount">85 TMT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Beta wersiýa — Häzir elýeterli
+    </div>
+
+    <h1 class="hero-title">
+      Söwdaňy & Karzňy<br>
+      <span class="line2">Sanly Dolandyr</span>
+    </h1>
+
+    <p class="hero-desc">
+      SowdaKarz — söwdagärler üçin döredilen mobil programma.<br>
+      Kassa, karz depder, hasabat — hemmesi bir elde. <strong>Offline.</strong>
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#pricing" class="btn-primary">
+        <span>Almak — 99 TMT</span>
+        <span>→</span>
+      </a>
+      <a href="#features" class="btn-secondary">
+        <span>Mümkinçilikleri gör</span>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">100<span>%</span></div>
+        <div class="hero-stat-lbl">Offline işleýär</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">5<span>+</span></div>
+        <div class="hero-stat-lbl">Esasy modul</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">2<span>×</span></div>
+        <div class="hero-stat-lbl">Dil goldawy</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="about">
-  <div class="container fade-up">
-    <div class="section-header">
-      <div class="section-tag" data-i18n="about_tag">ABOUT</div>
-      <h2 class="section-title" data-i18n="about_title">Who I Am</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-text" data-i18n="about_text">
-        <p>I'm a web and mobile developer from Turkmenistan. 4+ years working in the React ecosystem.</p>
-        <p>Frontend: React, Next.js, TypeScript. Backend: Node.js, Express, PostgreSQL, Prisma. Mobile: React Native, Expo.</p>
-        <p>Currently working on freelance and startup projects. My goal - clean code, fast delivery, real results.</p>
-      </div>
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-num" id="yearsStat">0</div>
-          <div class="stat-label" data-i18n="stat_exp">Years Experience</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num" id="projectsStat">0</div>
-          <div class="stat-label" data-i18n="stat_projects">Projects Completed</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">Full</div>
-          <div class="stat-label" data-i18n="stat_stack">Stack Level</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">24/7</div>
-          <div class="stat-label" data-i18n="stat_available">Available</div>
-        </div>
-      </div>
-    </div>
+<!-- ── FEATURES ── -->
+<section id="features">
+  <div class="features-header reveal">
+    <p class="section-label">Mümkinçilikler</p>
+    <h2 class="section-title">Bir programma —<br>hemme zat içinde</h2>
+    <p class="section-sub">Kassa ulgamy, karz depder, haryt bazasy, hasabat — öňki kagyz usulyny unudyň.</p>
   </div>
-</section>
 
-<section id="skills">
-  <div class="container fade-up">
-    <div class="section-header">
-      <div class="section-tag" data-i18n="skills_tag">SKILLS</div>
-      <h2 class="section-title" data-i18n="skills_title">Technologies</h2>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card"><div class="skill-icon">⚛️</div><h3 class="skill-title">Frontend</h3><div class="skill-tags"><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span><span class="tag">Zustand</span><span class="tag">React Query</span></div></div>
-      <div class="skill-card"><div class="skill-icon">⚙️</div><h3 class="skill-title">Backend</h3><div class="skill-tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">Prisma</span><span class="tag">REST API</span><span class="tag">JWT Auth</span></div></div>
-      <div class="skill-card"><div class="skill-icon">📱</div><h3 class="skill-title">Mobile</h3><div class="skill-tags"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">Expo Router</span><span class="tag">NativeWind</span><span class="tag">iOS</span><span class="tag">Android</span></div></div>
-    </div>
-  </div>
-</section>
+  <div class="features-grid">
 
-<section id="projects">
-  <div class="container fade-up">
-    <div class="section-header">
-      <div class="section-tag" data-i18n="projects_tag">PROJECTS</div>
-      <h2 class="section-title" data-i18n="projects_title">Recent Work</h2>
-    </div>
-    <div class="projects-grid">
-      <div class="project"><div class="project-img">📱</div><div class="project-body"><h3 class="project-title">Zaman App</h3><p class="project-desc" data-i18n="project1_desc">News and services platform for Turkmenistan. React Native, Expo, PostgreSQL.</p><div class="project-tech"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">PostgreSQL</span></div><div class="project-links"><a href="#" class="project-link">Demo →</a><a href="#" class="project-link">GitHub →</a></div></div></div>
-      <div class="project"><div class="project-img">💻</div><div class="project-body"><h3 class="project-title">E-Commerce Dashboard</h3><p class="project-desc" data-i18n="project2_desc">Admin panel. Next.js, Prisma, PostgreSQL. Real-time analytics.</p><div class="project-tech"><span class="tag">Next.js</span><span class="tag">Prisma</span><span class="tag">Tailwind</span></div><div class="project-links"><a href="#" class="project-link">Demo →</a><a href="#" class="project-link">GitHub →</a></div></div></div>
-      <div class="project"><div class="project-img">🚀</div><div class="project-body"><h3 class="project-title">API Service</h3><p class="project-desc" data-i18n="project3_desc">Node.js REST API. JWT auth, rate limiting, PostgreSQL.</p><div class="project-tech"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">PostgreSQL</span></div><div class="project-links"><a href="#" class="project-link">Docs →</a><a href="#" class="project-link">GitHub →</a></div></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="container fade-up">
-    <div class="contact-box">
-      <h2 class="contact-title" data-i18n="contact_title">Let's Work Together</h2>
-      <p class="contact-text" data-i18n="contact_text">Have a project or question? Get in touch. I reply within 24 hours.</p>
-      <div class="contact-links">
-        <a href="mailto:arslan03022002@gmail.com" class="btn btn-primary">Email</a>
-        <a href="tel:+99361006434" class="btn btn-secondary">+993 61 006434</a>
-        <a href="https://t.me/ArslanWebDev" target="_blank" class="btn btn-secondary">Telegram</a>
-        <a href="https://github.com/arslangurbanow" target="_blank" class="btn btn-secondary">GitHub</a>
+    <div class="feat-card wide reveal">
+      <div class="feat-icon blue">🛒</div>
+      <div class="feat-title">Kassa bölümi — Söwda ulgamy</div>
+      <div class="feat-desc">Her müşderi üçin aýry söwda aç, QR / ştrik kod bilen harytlary sebede goş. Töleg tamamlananda awtomatiki taryha ýazylyar. Ýalňyş goşulany poz, mukdary üýtget.</div>
+      <span class="feat-tag">QR skanerleme</span>
+      <div class="mini-dash">
+        <div class="mini-stat">
+          <div class="mini-stat-lbl">Sowda</div>
+          <div class="mini-stat-val cyan">47</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-lbl">Jemi</div>
+          <div class="mini-stat-val purple">2 840 T</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-lbl">Haryt</div>
+          <div class="mini-stat-val green">138</div>
+        </div>
       </div>
     </div>
+
+    <div class="feat-card reveal">
+      <div class="feat-icon purple">📒</div>
+      <div class="feat-title">Karz depder</div>
+      <div class="feat-desc">Müşderiniň adyny, telefonyny we karz möhletini ýaz. Ýeňil gözleg — ady ýa-da senesi boýunça tap. Tölendi — bir basyş bilen poz.</div>
+      <span class="feat-tag">Möhlet yzarlama</span>
+    </div>
+
+    <div class="feat-card reveal">
+      <div class="feat-icon green">📦</div>
+      <div class="feat-title">Harytlar bazasy</div>
+      <div class="feat-desc">QR / ştrik kod bilen haryt goş. Her harydyň öz ID-si, ady, bahasy. Gözleg, düzetme, pozma — aňsat.</div>
+      <span class="feat-tag">ID çaknyşmagy ýok</span>
+    </div>
+
+    <div class="feat-card reveal">
+      <div class="feat-icon gold">📊</div>
+      <div class="feat-title">Dashboard & Hasabatlar</div>
+      <div class="feat-desc">Günlük girdeji, karz statistikasy, grafikler. Möhleti dolanlar barada bildiriş — jaň ýa SMS göni programma içinden.</div>
+      <span class="feat-tag">PDF çykarmak</span>
+    </div>
+
+    <div class="feat-card reveal">
+      <div class="feat-icon blue">🌐</div>
+      <div class="feat-title">2 dil, 2 tema</div>
+      <div class="feat-desc">Türkmençe & Rusça. Garaňky & Açyk tema. Isledigiňçe üýtget — bir basyş bilen.</div>
+    </div>
+
+    <div class="feat-card reveal">
+      <div class="feat-icon purple">🔐</div>
+      <div class="feat-title">Lisenziýa ulgamy</div>
+      <div class="feat-desc">Her enjam üçin öz lisenziýa kody. Söwdagär öz enjamlynda işledýär — howpsuz, ygtybarly.</div>
+      <span class="feat-tag">Device ID goragy</span>
+    </div>
+
   </div>
 </section>
 
-<footer><div class="container"><p class="footer-text">© 2026 Arslan Gurbanow. <span data-i18n="footer_rights">All rights reserved.</span></p></div></footer>
+<!-- ── HOW IT WORKS ── -->
+<section id="how">
+  <div class="reveal" style="text-align:center;margin-bottom:56px;">
+    <p class="section-label">Nähili işleýär</p>
+    <h2 class="section-title">4 ädimde başla</h2>
+    <p class="section-sub" style="margin:0 auto;">Programmany al, enjamyňa gur, kod al — şol wagt işläp başlarsyň.</p>
+  </div>
+
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-num">1</div>
+      <div class="step-title">Satyn al</div>
+      <div class="step-desc">99 TMT standard ýa 199 TMT beta wersiýa saýla we töleg geçir.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">2</div>
+      <div class="step-title">Lisenziýa kody al</div>
+      <div class="step-desc">Enjamlaryňyň Device ID-si esasynda şahsy lisenziýa koduňy alarsyň.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">3</div>
+      <div class="step-title">Gur & Işlet</div>
+      <div class="step-desc">Programmany gur, kody girizip aktiwleşdir. Offline hem doly işleýär.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">4</div>
+      <div class="step-title">Goşant goş & Gazançly bol</div>
+      <div class="step-desc">Referral koduňy paýlaş — her gelen müşderiden 10% arzanladyş, seniň üçin hem syllag.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing">
+  <div class="reveal" style="text-align:center;margin-bottom:48px;">
+    <p class="section-label">Bahalar</p>
+    <h2 class="section-title">Açyk, adalatly bahalar</h2>
+    <p class="section-sub" style="margin:0 auto;">Bir gezek töle — ömrüňe ulan. Ýaňylanmalar 15% arzanladyş bilen elýeterli.</p>
+  </div>
+
+  <div class="pricing-grid reveal">
+
+    <div class="price-card">
+      <div class="price-tier">Standard</div>
+      <div class="price-name">Standart Wersiýa</div>
+      <div class="price-amount">
+        <span class="price-number">99</span>
+        <div>
+          <div class="price-currency">TMT</div>
+          <div class="price-period">bir gezeklik</div>
+        </div>
+      </div>
+      <div class="price-divider"></div>
+      <ul class="price-features">
+        <li><span class="ck">✓</span> Kassa / Söwda bölümi</li>
+        <li><span class="ck">✓</span> Karz depder</li>
+        <li><span class="ck">✓</span> Harytlar bazasy</li>
+        <li><span class="ck">✓</span> Dashboard & grafik</li>
+        <li><span class="ck">✓</span> Türkmençe & Rusça</li>
+        <li><span class="ck">✓</span> Offline işlemek</li>
+        <li><span class="ck">✓</span> Lisenziýa goragy</li>
+      </ul>
+      <a href="https://t.me/SowdaKarzBot" class="price-btn outlined">Almak</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-badge">⚡ Maslahat berilýär</div>
+      <div class="price-tier">Beta</div>
+      <div class="price-name">Beta Wersiýa</div>
+      <div class="price-amount">
+        <span class="price-number featured-num">199</span>
+        <div>
+          <div class="price-currency">TMT</div>
+          <div class="price-period">bir gezeklik</div>
+        </div>
+      </div>
+      <div class="price-divider"></div>
+      <ul class="price-features">
+        <li><span class="ck">✓</span> <strong>Standard</strong> ähli mümkinçilikler</li>
+        <li><span class="ck">✓</span> Iň täze funksiýalar ilki</li>
+        <li><span class="ck">✓</span> Beta syn hukugy</li>
+        <li><span class="ck">✓</span> PDF hasabat çykarmak</li>
+        <li><span class="ck">✓</span> Jaň / SMS içinden</li>
+        <li><span class="ck">✓</span> Telegram goldaw</li>
+        <li><span class="ck">✓</span> Üstünlik & ýalňyş sesleri</li>
+      </ul>
+      <a href="https://t.me/SowdaKarzBot" class="price-btn filled">Almak — 199 TMT</a>
+    </div>
+
+  </div>
+
+  <div class="renewal-box reveal">
+    <div class="renewal-icon">🔄</div>
+    <div class="renewal-text">
+      <strong>Ýaňylanma arzanladyşy:</strong> Üstünlikli alyp bolan müşderiler täze wersiýany <strong>15% arzanladyş</strong> bilen alyp bilýärler. Täze sowda etmek hökman däl — öňki koduňyz ýeterli.
+    </div>
+  </div>
+</section>
+
+<!-- ── REFERRAL ── -->
+<section id="referral">
+  <div class="referral-wrapper">
+
+    <div class="ref-visual reveal">
+      <div class="ref-card card1">
+        <div class="ref-card-title">Seniň Referral Koduň</div>
+        <div class="ref-code c1">SK–A47X</div>
+        <div class="ref-discount">Paýlaş → dostuň <strong>10% arzanladyş</strong> alýar</div>
+      </div>
+
+      <div class="ref-card card3">
+        <div class="ref-card-title">Dost alyp satyn alýar</div>
+        <div class="ref-code c2">✓ Tassyklandy</div>
+        <div class="ref-discount">Seniň koduň bilen geldi</div>
+      </div>
+
+      <div class="ref-card card2">
+        <div class="ref-card-title">Kodly müşderi bahasy</div>
+        <div class="ref-code" style="color:var(--accent3);font-size:1.3rem">99 → <span style="color:var(--accent)">89 TMT</span></div>
+        <div class="ref-discount">10 TMT arzanladyş aldy</div>
+      </div>
+    </div>
+
+    <div class="ref-content reveal">
+      <p class="section-label">Referral Sistema</p>
+      <h2 class="section-title">Dos getir —<br>ikisi-de utanýar</h2>
+      <p class="section-sub">Programma alanlar öz referral kodlaryny alýarlar. Ol kod bilen gelen müşderi <strong>10% arzanladyş</strong> alýar.</p>
+
+      <div class="ref-steps">
+        <div class="ref-step">
+          <div class="ref-step-num">1</div>
+          <div>
+            <div class="ref-step-title">Programma al → Öz koduňy al</div>
+            <div class="ref-step-desc">Her täze müşderi öz şahsy referral kodyny alýar. Meselem: SK–A47X</div>
+          </div>
+        </div>
+        <div class="ref-step">
+          <div class="ref-step-num">2</div>
+          <div>
+            <div class="ref-step-title">Koduňy paýlaş</div>
+            <div class="ref-step-desc">Dos, dogan, goňşy — kimiň bilen paýlaşsaň, ol şol kod bilen alýar.</div>
+          </div>
+        </div>
+        <div class="ref-step">
+          <div class="ref-step-num">3</div>
+          <div>
+            <div class="ref-step-title">Dostuň 10% arzanladyş alýar</div>
+            <div class="ref-step-desc">Seniň koduňy ulanýan müşderi 99 TMT ýerine <strong style="color:var(--accent)">89 TMT</strong> töleýär.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── TRUST ── -->
+<section id="trust">
+  <div class="trust-inner reveal">
+    <div>
+      <div class="trust-num">100<span>%</span></div>
+      <div class="trust-lbl">Offline işleýär</div>
+    </div>
+    <div>
+      <div class="trust-num"><span>≤</span>1sn</div>
+      <div class="trust-lbl">QR okama tizligi</div>
+    </div>
+    <div>
+      <div class="trust-num">2<span>×</span></div>
+      <div class="trust-lbl">Dil goldawy</div>
+    </div>
+    <div>
+      <div class="trust-num">0<span>₸</span></div>
+      <div class="trust-lbl">Abunaçylyk ýok</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="cta">
+  <h2 class="cta-title reveal">Söwdaňy <span>sanlaşdyr</span><br>bugün başla</h2>
+  <p class="cta-sub reveal">Kagyz depder, el hasaby — bulary terk et. SowdaKarz — söwdagäriň iň ýakyn kömekçisi.</p>
+  <div class="cta-btns reveal">
+    <a href="https://t.me/SowdaKarzBot" class="btn-primary" style="font-size:1rem;padding:16px 36px;">
+      ⚡ Häzir Al — 99 TMT
+    </a>
+    <a href="https://t.me/SowdaKarzBot" class="btn-secondary" style="font-size:1rem;padding:16px 36px;">
+      Telegram bilen habarlaş
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="footer-logo">⚡ SowdaKarz</span>
+  <p>© 2025 SowdaKarz. Ähli hukuklar goraglydyr.</p>
+  <div class="footer-links">
+    <a href="#features">Mümkinçilikler</a>
+    <a href="#pricing">Bahalar</a>
+    <a href="#referral">Referral</a>
+    <a href="https://t.me/SowdaKarzBot">Telegram</a>
+  </div>
+</footer>
 
 <script>
-  // translations
-  const translations = {
-    en: {
-      nav_about: "About", nav_skills: "Skills", nav_projects: "Projects", nav_contact: "Contact",
-      hero_badge: "TURKMENISTAN • FULLSTACK DEVELOPER", hero_greeting: "Hi, I'm",
-      hero_subtitle: "I build web and mobile applications with React, Next.js, Node.js, PostgreSQL, React Native and Expo. Fullstack developer turning ideas into complete products.",
-      hero_btn_projects: "View Projects →", hero_btn_contact: "Contact Me",
-      about_tag: "ABOUT", about_title: "Who I Am",
-      about_text: `<p>I'm a web and mobile developer from Turkmenistan. 4+ years working in the React ecosystem.</p><p>Frontend: React, Next.js, TypeScript. Backend: Node.js, Express, PostgreSQL, Prisma. Mobile: React Native, Expo.</p><p>Currently working on freelance and startup projects. My goal - clean code, fast delivery, real results.</p>`,
-      stat_exp: "Years Experience", stat_projects: "Projects Completed", stat_stack: "Stack Level", stat_available: "Available",
-      skills_tag: "SKILLS", skills_title: "Technologies",
-      projects_tag: "PROJECTS", projects_title: "Recent Work",
-      project1_desc: "News and services platform for Turkmenistan. React Native, Expo, PostgreSQL.",
-      project2_desc: "Admin panel. Next.js, Prisma, PostgreSQL. Real-time analytics.",
-      project3_desc: "Node.js REST API. JWT auth, rate limiting, PostgreSQL.",
-      contact_title: "Let's Work Together", contact_text: "Have a project or question? Get in touch. I reply within 24 hours.", footer_rights: "All rights reserved."
-    },
-    ru: {
-      nav_about: "Обо мне", nav_skills: "Навыки", nav_projects: "Проекты", nav_contact: "Контакты",
-      hero_badge: "ТУРКМЕНИСТАН • FULLSTACK РАЗРАБОТЧИК", hero_greeting: "Привет, я",
-      hero_subtitle: "Создаю веб и мобильные приложения на React, Next.js, Node.js, PostgreSQL, React Native и Expo. Fullstack разработчик, превращающий идеи в готовые продукты.",
-      hero_btn_projects: "Смотреть проекты →", hero_btn_contact: "Связаться",
-      about_tag: "ОБО МНЕ", about_title: "Кто я",
-      about_text: `<p>Я веб и мобильный разработчик из Туркменистана. 4+ года работаю в экосистеме React.</p><p>Frontend: React, Next.js, TypeScript. Backend: Node.js, Express, PostgreSQL, Prisma. Mobile: React Native, Expo.</p><p>Сейчас работаю над фриланс и стартап проектами. Моя цель - чистый код, быстрая разработка, реальный результат.</p>`,
-      stat_exp: "Лет опыта", stat_projects: "Завершенных проектов", stat_stack: "Уровень стека", stat_available: "Доступен",
-      skills_tag: "НАВЫКИ", skills_title: "Технологии",
-      projects_tag: "ПРОЕКТЫ", projects_title: "Последние работы",
-      project1_desc: "Платформа новостей и услуг для Туркменистана. React Native, Expo, PostgreSQL.",
-      project2_desc: "Админ панель. Next.js, Prisma, PostgreSQL. Аналитика в реальном времени.",
-      project3_desc: "Node.js REST API. JWT аутентификация, rate limiting, PostgreSQL.",
-      contact_title: "Давайте работать вместе", contact_text: "Есть проект или вопрос? Напишите мне. Отвечаю в течение 24 часов.", footer_rights: "Все права защищены."
-    }
-  };
-
-  let currentLang = 'en';
-  const langBtns = document.querySelectorAll('.lang-btn');
-  function setLanguage(lang) {
-    currentLang = lang;
-    document.documentElement.lang = lang;
-    langBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translations[lang][key]) {
-        if (key === 'about_text') el.innerHTML = translations[lang][key];
-        else el.textContent = translations[lang][key];
-      }
-    });
-  }
-  langBtns.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-
-  // mobile menu
-  const menuBtn = document.getElementById('menuBtn');
-  const navLinks = document.getElementById('navLinks');
-  menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-  document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
-
-  // smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) { const offset = 80; window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' }); }
-    });
-  });
-
-  // Intersection Observer for fade-up + count up animation
-  const fadeElements = document.querySelectorAll('.fade-up');
+  // ── SCROLL REVEAL ──
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        if (entry.target.id === 'about' && !window.countedStats) {
-          startCountUp();
-          window.countedStats = true;
-        }
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
       }
     });
-  }, { threshold: 0.2, rootMargin: "0px 0px -80px 0px" });
-  fadeElements.forEach(el => observer.observe(el));
-  
-  function startCountUp() {
-    const yearsEl = document.getElementById('yearsStat');
-    const projectsEl = document.getElementById('projectsStat');
-    if (!yearsEl || !projectsEl) return;
-    const yearsTarget = 4, projectsTarget = 20;
-    let yearsCurrent = 0, projectsCurrent = 0;
-    const duration = 1200;
-    const stepTime = 18;
-    const yearsStep = yearsTarget / (duration / stepTime);
-    const projectsStep = projectsTarget / (duration / stepTime);
-    const interval = setInterval(() => {
-      let updated = false;
-      if (yearsCurrent < yearsTarget) { yearsCurrent = Math.min(yearsCurrent + yearsStep, yearsTarget); yearsEl.innerText = Math.floor(yearsCurrent) + '+'; updated = true; }
-      if (projectsCurrent < projectsTarget) { projectsCurrent = Math.min(projectsCurrent + projectsStep, projectsTarget); projectsEl.innerText = Math.floor(projectsCurrent) + '+'; updated = true; }
-      if (!updated || (yearsCurrent >= yearsTarget && projectsCurrent >= projectsTarget)) clearInterval(interval);
-    }, stepTime);
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── NAVBAR SCROLL ──
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.background = window.scrollY > 40
+      ? 'rgba(10,10,15,0.98)'
+      : 'rgba(10,10,15,0.85)';
+  });
+
+  // ── COUNT UP ──
+  function countUp(el, target, suffix='') {
+    let start = 0;
+    const step = target / 50;
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.innerHTML = Math.floor(start) + suffix;
+    }, 30);
   }
 
-  // initial reveal for hero is visible by default
-  window.addEventListener('load', () => {
-    document.querySelectorAll('.fade-up').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight-100) el.classList.add('visible'); });
-    if(document.getElementById('about').getBoundingClientRect().top < window.innerHeight) startCountUp();
+  const countsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        countsObserver.unobserve(e.target);
+        const nums = e.target.querySelectorAll('.trust-num');
+        // just animate the price numbers slightly
+        nums.forEach(n => {
+          n.style.transition = 'opacity 0.5s';
+          n.style.opacity = '0';
+          setTimeout(() => n.style.opacity = '1', 300);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const trustSec = document.querySelector('.trust-inner');
+  if (trustSec) countsObserver.observe(trustSec);
+
+  // ── SMOOTH ANCHOR ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
-  setLanguage('en');
 </script>
 </body>
 </html>
